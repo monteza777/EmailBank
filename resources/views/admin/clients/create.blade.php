@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.compids.title')</h3>
-    {!! Form::model($compid, ['method' => 'PUT', 'route' => ['admin.compids.update', $compid->id]]) !!}
+    <h3 class="page-title">@lang('quickadmin.clients.title')</h3>
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.clients.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,35 +12,37 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('compid_name', trans('quickadmin.compids.fields.compid_name').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('compid_name', old('compid_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('client_name', trans('quickadmin.clients.fields.client_name').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('client_name', old('client_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('compid_name'))
+                    @if($errors->has('client_name'))
                         <p class="help-block">
-                            {{ $errors->first('compid_name') }}
+                            {{ $errors->first('client_name') }}
                         </p>
                     @endif
                 </div>
             </div>
             
         </div>
-        
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            Client Emails
+            Compid
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('quickadmin.cemails.fields.client_emails')</th>
+                    <th>@lang('quickadmin.compids.fields.compid_name')</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody id="users">
-                   <!--  -->
-
+                    @foreach(old('compids', []) as $index => $data)
+                        @include('admin.clients.compids_row', [
+                            'index' => $index
+                        ])
+                    @endforeach
                 </tbody>
             </table>
             <a href="#" class="btn btn-success pull-right add-new">@lang('quickadmin.qa_add_new')</a>
@@ -56,7 +58,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.compids.edit_cemails_row',
+        @include('admin.clients.compids_row',
                 [
                     'index' => '_INDEX_',
                 ])

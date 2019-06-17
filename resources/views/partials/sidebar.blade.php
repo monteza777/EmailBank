@@ -71,19 +71,19 @@
                 </a>
                 <ul class="treeview-menu">
                     
-                    @can('user_access')
-                    <li>
-                        <a href="{{ route('admin.compids.index') }}">
-                            <i class="fa fa-th-list"></i>
-                            <span>@lang('quickadmin.compids.title')</span>
-                        </a>
-                    </li>@endcan
-                    
                     @can('user_action_access')
                     <li>
                         <a href="{{ route('admin.clients.index') }}">
                             <i class="fa fa-user"></i>
                             <span>@lang('quickadmin.clients.title_sidebar')</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('user_access')
+                    <li>
+                        <a href="{{ route('admin.compids.index') }}">
+                            <i class="fa fa-th-list"></i>
+                            <span>@lang('quickadmin.compids.title')</span>
                         </a>
                     </li>@endcan
 

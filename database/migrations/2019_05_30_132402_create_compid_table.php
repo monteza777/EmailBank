@@ -15,7 +15,8 @@ class CreateCompidTable extends Migration
     {
         Schema::create('compids', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('client_id');
+            $table->string('compid_name');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ return [
 	'compids' => [
 		'title' => 'Composition ID',
 		'fields' => [
-			'name' => 'CompID',
+			'compid_name' => 'CompID',
 			'created_date' => 'Created Date'
 		],
 	],

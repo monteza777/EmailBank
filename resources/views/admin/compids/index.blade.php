@@ -25,7 +25,8 @@
                             <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         @endcan
 
-                        <th>@lang('quickadmin.compids.fields.name')</th>
+                        <th>@lang('quickadmin.clients.fields.client_name')</th>
+                        <th>@lang('quickadmin.compids.fields.compid_name')</th>
                         <th>@lang('quickadmin.compids.fields.created_date')</th>
                                                 <th>&nbsp;</th>
 
@@ -39,10 +40,10 @@
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
+                                <td field-key='name'>{{$compid->client->client_name}}</td>
+                                <td field-key='name'>{{ $compid->compid_name }}</td>
 
-                                <td field-key='name'>{{ $compid->name }}</td>
-
-                                <td field-key='email'>{{ $compid->created_at->toFormattedDateString() }}</td>
+                                <td field-key='email'></td>
                                                                 <td>
                                     @can('user_view')
                                     <a href="{{ route('admin.compids.show',[$compid->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>

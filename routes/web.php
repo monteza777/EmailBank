@@ -22,13 +22,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
-    Route::get('compids/gmail/{id}','Admin\CompIdsController@gmail')->name('compids.gmail');
-    Route::resource('compids', 'Admin\CompIdsController');
-    Route::post('compids_mass_destroy', ['uses' => 'Admin\CompIdsController@massDestroy', 'as' => 'compids.mass_destroy']);
     Route::get('clients/gmail/{id}','Admin\ClientsController@gmail')->name('clients.gmail');
     Route::resource('clients', 'Admin\ClientsController');
     Route::post('clients_mass_destroy', ['uses' => 'Admin\ClientsController@massDestroy', 'as' => 'clients.mass_destroy']);
-
+    Route::get('compids/gmail/{id}','Admin\CompIdsController@gmail')->name('compids.gmail');
+    Route::resource('compids', 'Admin\CompIdsController');
+    Route::post('compids_mass_destroy', ['uses' => 'Admin\CompIdsController@massDestroy', 'as' => 'compids.mass_destroy']);
     Route::resource('cemails', 'Admin\CemailsController');
     Route::post('cemails_mass_destroy', ['uses' => 'Admin\CemailsController@massDestroy', 'as' => 'cemails.mass_destroy']);
     

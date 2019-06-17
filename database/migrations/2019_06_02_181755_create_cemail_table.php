@@ -16,7 +16,8 @@ class CreateCemailTable extends Migration
 
         Schema::create('cemails', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('client_id');
+            $table->integer('compid_id');
+            // $table->integer('client_id');
             $table->string('client_email')->nullable();
             $table->timestamps();
         });

@@ -13,53 +13,52 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('quickadmin.compids.fields.name')</th>
-                            <td field-key='title'>{{ $compids->name }}</td>
+                            <th>@lang('quickadmin.compids.fields.compid_name')</th>
+                            <td field-key='title'>{{ $compids->compid_name }}</td>
                         </tr>
                     </table>
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
     
-<li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Client</a></li>
+<li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">compid</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
     
 <div role="tabpanel" class="tab-pane active" id="users">
-<table class="table table-bordered table-striped {{ count($clients) > 0 ? 'datatable' : '' }}">
+<table class="table table-bordered table-striped {{ count($compids) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
-            <th>@lang('quickadmin.clients.fields.client_name')</th>
-            <th>&nbsp;</th>
+            <th>@lang('quickadmin.cemails.fields.client_emails')</th>
+            <th>Action</th>
 
         </tr>
     </thead>
 
     <tbody>
-        @if (count($clients) > 0)
-            @foreach ($clients as $client)
-                <tr data-entry-id="{{ $client->id }}">
-                    <td field-key='email'><a href="{{ route('admin.clients.gmail',[$client->id]) }}" target="_blank">{{ $client->client_name }}</a></td>
-                    <td>
-                        @can('user_view')
-                        <a href="{{ route('admin.clients.show',[$client->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
-                        @endcan
-                        @can('user_edit')
-                        <a href="{{ route('admin.clients.edit',[$client->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
-                        @endcan
-                        @can('user_delete')
-                        {!! Form::open(array(
-                            'style' => 'display: inline-block;',
-                            'method' => 'DELETE',
-                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                            'route' => ['admin.clients.destroy', $client->id])) !!}
-                        {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                        {!! Form::close() !!}
-                        @endcan
+        @if (count($compids) > 0)
+            @foreach($compids->cemails as $cemail)
+                <tr>
+                    <td field-key='email'>{{$cemail->client_email}}</td>
+                                                                <td>
+                                    @can('user_view')
+                                    <a href="{{ route('admin.cemails.show',[$cemail->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    @endcan
+                                    @can('user_edit')
+                                    <a href="{{ route('admin.cemails.edit',[$cemail->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    @endcan
+                                    @can('user_delete')
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                        'route' => ['admin.cemails.destroy', $cemail->id])) !!}
+                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
                     </td>
-
                 </tr>
             @endforeach
         @else

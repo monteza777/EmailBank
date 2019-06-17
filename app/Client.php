@@ -8,12 +8,10 @@ class Client extends Model
 {
 	protected $fillable = ['client_name','client_email'];
 
-    public function compid(){
+    public function compids(){
 
-        return $this->belongsTo(Compid::class);
+        return $this->hasMany(Compid::class);
     }
 
-    public function cemails(){
-    	return $this->hasMany(Cemail::class);
-    }
+    
 }

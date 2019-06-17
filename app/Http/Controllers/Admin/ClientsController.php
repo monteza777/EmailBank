@@ -16,6 +16,22 @@ class ClientsController extends Controller
         return view('admin.clients.index',compact('clients'));
     }
 
+    public function create(){
+        return view('admin.clients.create');
+
+    }
+    
+    public function store(Request $request)
+    {
+        $clients = Client::create($request->all());
+
+        foreach($request->input('compids', []) as $data){
+            $clients->compids()->create($data);
+        }
+
+        return redirect()->route('admin.clients.index');
+    }
+
     public function show($id)
     {
         $clients = Client::findOrFail($id);
