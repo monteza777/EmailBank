@@ -78,8 +78,16 @@ class ClientsController extends Controller
 
     public function destroy($id)
     {
-        $compid = Client::findOrFail($id);
-        $compid->delete();
+        // $client = Client::findOrFail($id);
+        // $compid_id = $client->compids()->where('client_id',$id)->pluck('id')->first();
+
+        // $client->compids->find($compid_id)->compids()->detach();
+        //$compid->find($id)->compids()->detach();
+
+        // $compid = $client->compids()->delete();
+        // $compid->where('client_id',$id)->compids()->detach();
+        // return $compid_id;
+        // $client->delete();
 
         return redirect()->route('admin.clients.index');
     }

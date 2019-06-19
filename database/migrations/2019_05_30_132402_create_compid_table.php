@@ -18,6 +18,7 @@ class CreateCompidTable extends Migration
             $table->integer('client_id');
             $table->string('compid_name');
             $table->timestamps();
+            // $table->foreign('cemails_id')->references('id')->on('cemails')->onDelete('cascade');
         });
     }
 

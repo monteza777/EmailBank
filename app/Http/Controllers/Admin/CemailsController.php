@@ -14,6 +14,17 @@ class CemailsController extends Controller
         $cemails = Cemail::all();
         return view('admin.cemails.index',compact('cemails'));
     }
+    public function create()
+    {
+        $cemails = Cemail::all();
+        return view('admin.cemails.create',compact('cemails'));
+    }
+
+    public function store(Request $request)
+    {
+        $cemail = Cemail::create($request->all());
+        return redirect()->route('admin.compids.index');
+    }
 
     public function show($id)
     {

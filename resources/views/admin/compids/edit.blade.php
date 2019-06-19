@@ -38,9 +38,20 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
+                
                 <tbody id="users">
-                   <!--  -->
-
+                  @forelse(old('cemails', []) as $index => $data)
+                        @include('admin.compids.edit_cemails_row', [
+                            'index' => $index
+                        ])
+                    @empty
+                        @foreach($compid->cemails as $item)
+                            @include('admin.compids.edit_cemails_row', [
+                                'index' => 'id-' . $item->id,
+                                'field' => $item
+                            ])
+                        @endforeach
+                    @endforelse
                 </tbody>
             </table>
             <a href="#" class="btn btn-success pull-right add-new">@lang('quickadmin.qa_add_new')</a>
@@ -48,7 +59,7 @@
     </div>
 
     {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
-    <a href="{{ url()->previous() }}" class="btn btn-info">Back</a>
+    <a href="{{ route('admin.compids.index') }}" class="btn btn-info">Back</a>
     {!! Form::close() !!}
 @stop
 
@@ -60,7 +71,7 @@
                 [
                     'index' => '_INDEX_',
                 ])
-               </script > 
+    </script > 
 
             <script>
         $('.add-new').click(function () {

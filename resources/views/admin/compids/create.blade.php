@@ -12,12 +12,12 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('name', trans('quickadmin.compids.fields.name').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('compid_name', trans('quickadmin.compids.fields.compid_name').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('compid_name', old('compid_name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('name'))
+                    @if($errors->has('compid_name'))
                         <p class="help-block">
-                            {{ $errors->first('name') }}
+                            {{ $errors->first('compid_name') }}
                         </p>
                     @endif
                 </div>
@@ -58,7 +58,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.compids.clients_row',
+        @include('admin.compids.cemails_row',
                 [
                     'index' => '_INDEX_',
                 ])

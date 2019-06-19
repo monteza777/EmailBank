@@ -4,10 +4,10 @@
 @section('content')
     <h3 class="page-title">@lang('quickadmin.compids.title')</h3>
     @can('user_create')
-    <p>
+    <!-- <p>
         <a href="{{ route('admin.compids.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
         
-    </p>
+    </p> -->
     @endcan
 
     
@@ -40,11 +40,15 @@
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
-                                <td field-key='name'>{{$compid->client->client_name}}</td>
+                                <td field-key='name'>
+                                    {{ $compid->client->client_name }}
+                                </td>
                                 <td field-key='name'>{{ $compid->compid_name }}</td>
 
-                                <td field-key='email'></td>
-                                                                <td>
+                                <td field-key='date'>
+                                    {{ $compid->created_at->toDateTimeString() }}
+                                </td>
+                                <td>
                                     @can('user_view')
                                     <a href="{{ route('admin.compids.show',[$compid->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                                     @endcan

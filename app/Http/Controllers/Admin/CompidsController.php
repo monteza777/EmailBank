@@ -15,6 +15,8 @@ class CompidsController extends Controller
     public function index()
     {
         $compids = Compid::all();
+        // $cemails = $compids->cemails()->get()->pluck('client_email', 'id')
+        //                 ->prepend(trans('quickadmin.qa_please_select'), '');
         return view('admin.compids.index',compact('compids'));
 
         // $compids = Compid::find(1)->cemails;
@@ -24,7 +26,8 @@ class CompidsController extends Controller
 
     public function create()
     {
-        return view('admin.compids.create');
+        $cemails = Compid::all();
+        return view('admin.compids.create',compact('cemails'));
     }
 
     public function store(Request $request)
@@ -41,19 +44,16 @@ class CompidsController extends Controller
     public function show($id)
     {
         $compids = Compid::findOrFail($id);
-        // foreach ($compids->cemails as $cemail) {
-        //     return $cemail;
-        // }
         return view('admin.compids.show',compact('compids'));
     }
 
     public function edit($id)
     {
         $compid = Compid::findOrFail($id);
-        $emails = $compid->cemails()->get()->pluck('client_email', 'id')
-                        ->prepend(trans('quickadmin.qa_please_select'), '');
+        // $emails = $compid->cemails()->get()->pluck('client_email', 'id')
+        //                 ->prepend(trans('quickadmin.qa_please_select'), '');
                         
-        $cemails = Cemail::all()->pluck('client_email', 'id')
+        $cemails = Cemail::get()->pluck('client_email', 'id')
                         ->prepend(trans('quickadmin.qa_please_select'), '');
 
         return view('admin.compids.edit', compact('compid','emails','cemails'));
@@ -75,8 +75,9 @@ class CompidsController extends Controller
     public function destroy($id)
     {
         $compid = Compid::findOrFail($id);
+        // $compid->cemails()->detach();
+        $compid->find($id)->compids()->detach();
         $compid->delete();
-
         return redirect()->route('admin.compids.index');
     }
 
