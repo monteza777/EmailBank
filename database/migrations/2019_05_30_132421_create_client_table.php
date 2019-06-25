@@ -6,29 +6,22 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateClientTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            // $table->string('compid_id');
             $table->string('client_name');
             $table->string('client_email')->nullable();
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('clients');
+        // Schema::table('clients', function (Blueprint, $table){
+        //     $table->dropColumn('deleted_at');
+        // });
     }
 }

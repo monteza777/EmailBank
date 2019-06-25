@@ -31,30 +31,30 @@
 <table class="table table-bordered table-striped {{ count($clients) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
-            <th>@lang('quickadmin.cemails.fields.client_emails')</th>
-            <th>&nbsp;</th>
+            <th>@lang('quickadmin.compids.fields.compid_name')</th>
+            <th>@lang('quickadmin.qa_action')</th>
 
         </tr>
     </thead>
 
     <tbody>
-        @if (count($cemails) > 0)
-            @foreach ($cemails as $cemail)
-                <tr data-entry-id="{{ $cemail->id }}">
-                    <td field-key='email'>{{ $cemail->client_email }}</td>
+        @if (count($clients) > 0)
+            @foreach ($clients->compids as $compid)
+                <tr data-entry-id="{{ $compid->id }}">
+                    <td field-key='email'>{{ $compid->compid_name }}</td>
                     <td>
                         @can('user_view')
-                        <a href="{{ route('admin.cemails.show',[$cemail->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                        <a href="{{ route('admin.compids.show',[$compid->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                         @endcan
                         @can('user_edit')
-                        <a href="{{ route('admin.cemails.edit',[$cemail->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                        <a href="{{ route('admin.compids.edit',[$compid->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
                         @endcan
                         @can('user_delete')
                         {!! Form::open(array(
                             'style' => 'display: inline-block;',
                             'method' => 'DELETE',
                             'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                            'route' => ['admin.cemails.destroy', $cemail->id])) !!}
+                            'route' => ['admin.compids.destroy', $compid->id])) !!}
                         {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                         {!! Form::close() !!}
                         @endcan

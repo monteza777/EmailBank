@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Compid extends Model
 {
 	protected $fillable = ['compid_name'];
+    
     public function client() {
         return $this->belongsTo(Client::class);
     }

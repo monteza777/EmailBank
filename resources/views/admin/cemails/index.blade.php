@@ -27,7 +27,7 @@
                         <!-- <th>@lang('quickadmin.clients.fields.client_name')</th> -->
                         <th>@lang('quickadmin.cemails.fields.client_emails')</th>
                         <th>@lang('quickadmin.cemails.fields.created_date')</th>
-                                                <th>&nbsp;</th>
+                        <th>@lang('quickadmin.qa_action')</th>
 
                     </tr>
                 </thead>
@@ -56,7 +56,7 @@
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
                                         'route' => ['admin.cemails.destroy', $cemail->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::submit(trans('quickadmin.qa_soft_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
                                 </td>

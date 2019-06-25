@@ -75,8 +75,7 @@ class CompidsController extends Controller
     public function destroy($id)
     {
         $compid = Compid::findOrFail($id);
-        // $compid->cemails()->detach();
-        $compid->find($id)->compids()->detach();
+        $compid->cemails()->detach();
         $compid->delete();
         return redirect()->route('admin.compids.index');
     }
@@ -85,7 +84,7 @@ class CompidsController extends Controller
 
         $compid = Compid::findOrFail($id);
 
-        $client = $compid->clients()->pluck('client_email');
+        $client = $compid->cemails()->pluck('client_email');
 
         $url = 'https://mail.google.com/mail/u/0/?view=cm&fs=1&to='.$client->implode(',');
 

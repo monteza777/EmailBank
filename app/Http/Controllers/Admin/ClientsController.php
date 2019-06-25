@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Client;
-use App\Cemail;
+use App\Compid;
 use Illuminate\Support\Facades\Redirect;
 
 class ClientsController extends Controller
@@ -35,17 +35,18 @@ class ClientsController extends Controller
     public function show($id)
     {
         $clients = Client::findOrFail($id);
-        $cemails =  Cemail::where('client_id', $id)->get();
-
-        return view('admin.clients.show',compact('clients','cemails'));
+        // $compid =  Compid::where('client_id', $id)->get();
+        // return $clients->compids()->compid_name;
+        return view('admin.clients.show',compact('clients'));
     }
 
 
     public function edit($id)
     {
         $client = Client::findOrFail($id);
-
-        return view('admin.clients.edit', compact('client'));
+        $compids = Compid::get()->pluck('compid_name', 'id')
+                        ->prepend(trans('quickadmin.qa_please_select'), '');
+        return view('admin.clients.edit', compact('client','compids'));
     }
 
 
@@ -54,19 +55,19 @@ class ClientsController extends Controller
         $client = Client::findOrFail($id);
         $client->update($request->all());
 
-        $cemails           = $client->cemails;
-        $currentCemailData = [];
-        foreach ($request->input('cemails', []) as $index => $data) {
+        $compids           = $client->compids;
+        $currentCompidData = [];
+        foreach ($request->input('compids', []) as $index => $data) {
             if (is_integer($index)) {
-                $client->cemails()->create($data);
+                $client->compids()->create($data);
             } else {
                 $id                     = explode('-', $index)[1];
-                $currentCemailData[$id] = $data;
+                $currentCompidData[$id] = $data;
             }
         }
-        foreach ($cemails as $item) {
-            if (isset($currentCemailData[$item->id])) {
-                $item->update($currentCemailData[$item->id]);
+        foreach ($compids as $item) {
+            if (isset($currentCompidData[$item->id])) {
+                $item->update($currentCompidData[$item->id]);
             } else {
                 $item->delete();
             }
@@ -89,6 +90,8 @@ class ClientsController extends Controller
         // return $compid_id;
         // $client->delete();
 
+        $client = Client::findOrFail($id);
+        $client->delete();
         return redirect()->route('admin.clients.index');
     }
 

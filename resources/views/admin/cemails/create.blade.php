@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.compids.title')</h3>
+    <h3 class="page-title">@lang('quickadmin.cemails.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['admin.cemails.store']]) !!}
 
     <div class="panel panel-default">
@@ -12,7 +12,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('client_email', trans('quickadmin.cemails.fields.client_email').'*', ['class' => 'control-label']) !!}
+                    {!! Form::label('client_email', trans('quickadmin.cemails.fields.client_emails').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('client_email', old('client_email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('client_email'))

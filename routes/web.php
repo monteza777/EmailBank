@@ -30,7 +30,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('compids_mass_destroy', ['uses' => 'Admin\CompIdsController@massDestroy', 'as' => 'compids.mass_destroy']);
     Route::resource('cemails', 'Admin\CemailsController');
     Route::post('cemails_mass_destroy', ['uses' => 'Admin\CemailsController@massDestroy', 'as' => 'cemails.mass_destroy']);
-    
+    Route::get('archives', ['uses' => 'Admin\CemailsController@archives', 'as' => 'cemails.archives']);
+    Route::get('restore/{id}', ['uses' => 'Admin\CemailsController@restore', 'as' => 'cemails.restore']);
+    Route::get('cemails_ar/{id}', ['uses' => 'Admin\CemailsController@viewArchive', 'as' => 'cemails.cemails_ar']);
+    Route::delete('permanentDelete/{id}', ['uses' => 'Admin\CemailsController@permanentDelete', 'as' => 'cemails.permanentDelete']);
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
     Route::resource('user_actions', 'Admin\UserActionsController');
  

@@ -2,14 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.clients.title')</h3>
-
-    @can('user_create')
-    <p>
-        <a href="{{ route('admin.clients.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
-        
-    </p>
-    @endcan
+    <h3 class="page-title">@lang('quickadmin.cemails.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -17,43 +10,45 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($clients) > 0 ? 'datatable' : '' }} @can('user_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped {{ count($cemails) > 0 ? 'datatable' : '' }} @can('user_delete') dt-select @endcan">
                 <thead>
                     <tr>
                         @can('user_delete')
                             <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         @endcan
-                        <th>@lang('quickadmin.clients.fields.client_name')</th>
-                        <th>@lang('quickadmin.clients.fields.created_date')</th>
+                        <th>@lang('quickadmin.cemails.fields.client_emails')</th>
+                        <th>@lang('quickadmin.cemails.fields.created_date')</th>
+                        <th>@lang('quickadmin.cemails.fields.deleted_date')</th>
                         <th>@lang('quickadmin.qa_action')</th>
 
                     </tr>
                 </thead>
                 
                 <tbody>
-                    @if (count($clients) > 0)
-                        @foreach ($clients as $client)
-                            <tr data-entry-id="{{ $client->id }}">
+                    @if (count($cemails) > 0)
+                        @foreach ($cemails as $cemail)
+                            <tr data-entry-id="{{ $cemail->id }}">
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
-                                <td field-key='name'>{{ $client->client_name }}</td>
+                                <td field-key='name'>{{ $cemail->client_email }}</td>
 
-                                <td field-key='email'>{{ $client->created_at->toFormattedDateString() }}</td>
+                                <td field-key='email'>{{ $cemail->created_at }}</td>
+                                <td field-key='email'>{{ $cemail->deleted_at}}</td>
                                                                 <td>
                                     @can('user_view')
-                                    <a href="{{ route('admin.clients.show',[$client->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.cemails.cemails_ar',[$cemail->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                                     @endcan
                                     @can('user_edit')
-                                    <a href="{{ route('admin.clients.edit',[$client->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.cemails.restore',[$cemail->id]) }}" class="btn btn-xs btn-success">@lang('quickadmin.qa_restore')</a>
                                     @endcan
                                     @can('user_delete')
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.clients.destroy', $client->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                        'route' => ['admin.cemails.permanentDelete', $cemail->id])) !!}
+                                    {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
                                 </td>
@@ -74,7 +69,7 @@
 @section('javascript') 
     <script>
         @can('user_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.clients.mass_destroy') }}';
+            window.route_mass_crud_entries_destroy = '{{ route('admin.cemails.mass_destroy') }}';
         @endcan
 
     </script>

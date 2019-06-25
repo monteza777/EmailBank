@@ -11,7 +11,7 @@ return [
 	'compids' => [
 		'title' => 'Composition ID',
 		'fields' => [
-			'compid_name' => 'CompID',
+			'compid_name' => 'Compid Name',
 			'created_date' => 'Created Date'
 		],
 	],
@@ -29,7 +29,8 @@ return [
 		'title_sidebar' => 'Emails',
 		'fields' => [
 			'client_emails' => 'Client Emails',
-			'created_date' => 'Created Date'
+			'created_date' => 'Created Date',
+			'deleted_date' => 'Deleted Date'
 		],
 	],
 	'roles' => [
@@ -85,6 +86,8 @@ return [
 	'qa_back_to_list' => 'Back to list',
 	'qa_dashboard' => 'Dashboard',
 	'qa_delete' => 'Delete',
+	'qa_soft_delete' => 'Archive',
+	'qa_soft_deletes' => 'Archives',
 	'qa_delete_selected' => 'Delete selected',
 	'qa_category' => 'Category',
 	'qa_categories' => 'Categories',
@@ -199,6 +202,7 @@ return [
 	'qa_created_at' => 'Created at',
 	'qa_updated_at' => 'Updated at',
 	'qa_deleted_at' => 'Deleted at',
+	'qa_soft_deleted_at' => 'Archive',
 	'qa_reports_x_axis_field' => 'X-axis - please choose one of date/time fields',
 	'qa_reports_y_axis_field' => 'Y-axis - please choose one of number fields',
 	'qa_select_crud_placeholder' => 'Please select one of your CRUDs',

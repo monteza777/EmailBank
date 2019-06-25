@@ -23,7 +23,7 @@ class CemailsController extends Controller
     public function store(Request $request)
     {
         $cemail = Cemail::create($request->all());
-        return redirect()->route('admin.compids.index');
+        return redirect()->route('admin.cemails.index');
     }
 
     public function show($id)
@@ -36,7 +36,6 @@ class CemailsController extends Controller
     {
         $cemail = Cemail::findOrFail($id);
         return view('admin.cemails.edit',compact('cemail'));
-
     }
 
     public function update(Request $request, $id)
@@ -49,6 +48,7 @@ class CemailsController extends Controller
     public function destroy($id)
     {
         $cemail = Cemail::findOrFail($id);
+        $cemail->compids()->detach();
         $cemail->delete();
         return redirect()->route('admin.cemails.index');
     }
@@ -62,6 +62,29 @@ class CemailsController extends Controller
                 $entry->delete();
             }
         }
+    }
+
+    public function archives(){
+        $cemails = Cemail::onlyTrashed()->get();
+        return view('admin.cemails.trashed',compact('cemails'));
+    }
+
+    public function restore($id)
+    {
+        $cemail = Cemail::withTrashed()->find($id)->restore();
+        return redirect ('admin/cemails');
+    }
+
+    public function permanentDelete($id)
+    {
+        $cemail = Cemail::withTrashed()->findOrFail($id)->forceDelete();
+        // return $cemail;
+        return redirect ('admin/archives');
+    }
+
+    public function viewArchive($id){
+        $cemails = Cemail::withTrashed()->findOrFail($id);
+        return view('admin.cemails.cemails_ar',compact('cemails'));
     }
 
 

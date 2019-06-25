@@ -27,24 +27,24 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            Client
+            Compid
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('quickadmin.cemails.fields.client_emails')</th>
+                    <th>@lang('quickadmin.compids.fields.compid_name')</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody id="users">
-                    @forelse(old('cemails', []) as $index => $data)
-                        @include('admin.clients.cemails_row', [
+                    @forelse(old('compids', []) as $index => $data)
+                        @include('admin.clients.edit_compids_row', [
                             'index' => $index
                         ])
                     @empty
-                        @foreach($client->cemails as $item)
-                            @include('admin.clients.cemails_row', [
+                        @foreach($client->compids as $item)
+                            @include('admin.clients.edit_compids_row', [
                                 'index' => 'id-' . $item->id,
                                 'field' => $item
                             ])
@@ -66,7 +66,7 @@
     @parent
 
     <script type="text/html" id="users-template">
-        @include('admin.clients.cemails_row',
+        @include('admin.clients.edit_compids_row',
                 [
                     'index' => '_INDEX_',
                 ])

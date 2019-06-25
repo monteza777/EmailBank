@@ -43,7 +43,11 @@
                                 <td field-key='name'>
                                     {{ $compid->client->client_name }}
                                 </td>
-                                <td field-key='name'>{{ $compid->compid_name }}</td>
+                                <td field-key='name'>
+                                    <a href="{{route('admin.compids.gmail',[$compid->id])}}" target="_blank"> 
+                                    {{ $compid->compid_name }}
+                                    </a>
+                                </td>
 
                                 <td field-key='date'>
                                     {{ $compid->created_at->toDateTimeString() }}
