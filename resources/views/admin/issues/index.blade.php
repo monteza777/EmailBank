@@ -2,15 +2,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.compids.title')</h3>
-    @can('user_create')
-    <!-- <p>
-        <a href="{{ route('admin.compids.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
-        
-    </p> -->
-    @endcan
+    <h3 class="page-title">@lang('quickadmin.issues.title')</h3>
 
-    
+    @can('user_create')
+    <p>
+        <a href="{{ route('admin.issues.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
+        
+    </p>
+    @endcan
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,53 +17,43 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($compids) > 0 ? 'datatable' : '' }} @can('user_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped {{ count($issues) > 0 ? 'datatable' : '' }} @can('user_delete') dt-select @endcan">
                 <thead>
                     <tr>
                         @can('user_delete')
                             <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         @endcan
 
-                        <th>@lang('quickadmin.clients.fields.client_name')</th>
-                        <th>@lang('quickadmin.compids.fields.compid_name')</th>
-                        <th>@lang('quickadmin.compids.fields.created_date')</th>
-                                                <th>&nbsp;</th>
+                        <th>@lang('quickadmin.issues.fields.issues_name')</th>
+                        <th>@lang('quickadmin.issues.fields.created_date')</th>
+                        <th>@lang('quickadmin.qa_action')</th>
 
                     </tr>
                 </thead>
                 
                 <tbody>
-                    @if (count($compids) > 0)
-                        @foreach ($compids as $compid)
-                            <tr data-entry-id="{{ $compid->id }}">
+                    @if (count($issues) > 0)
+                        @foreach ($issues as $issue)
+                            <tr data-entry-id="{{ $issue->id }}">
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
-                                <td field-key='name'>
-                                    {{ $compid->client->client_name }}
-                                </td>
-                                <td field-key='name'>
-                                    <a href="{{route('admin.compids.gmail',[$compid->id])}}" target="_blank" class="btn btn-sm btn-success"> 
-                                    {{ $compid->compid_name }}
-                                    </a>
-                                </td>
+                                <td field-key='name'>{{ $issue->issues_name }}</td>
 
-                                <td field-key='date'>
-                                    {{ $compid->created_at->toDateTimeString() }}
-                                </td>
-                                <td>
+                                <td field-key='email'>{{ $issue->created_at->toDateTimeString() }}</td>
+                                                                <td>
                                     @can('user_view')
-                                    <a href="{{ route('admin.compids.show',[$compid->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.issues.show',[$issue->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                                     @endcan
                                     @can('user_edit')
-                                    <a href="{{ route('admin.compids.edit',[$compid->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.issues.edit',[$issue->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
                                     @endcan
                                     @can('user_delete')
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.compids.destroy', $compid->id])) !!}
+                                        'route' => ['admin.issues.destroy', $issue->id])) !!}
                                     {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
@@ -86,7 +75,7 @@
 @section('javascript') 
     <script>
         @can('user_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.compids.mass_destroy') }}';
+            window.route_mass_crud_entries_destroy = '{{ route('admin.issues.mass_destroy') }}';
         @endcan
 
     </script>

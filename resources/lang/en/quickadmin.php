@@ -15,6 +15,13 @@ return [
 			'created_date' => 'Created Date'
 		],
 	],
+	'issues' => [
+		'title' => 'Issues',
+		'fields' => [
+			'issues_name' => 'Issues Description',
+			'created_date' => 'Created Date'
+		],
+	],
 	'clients' => [
 		'title' => 'Client',
 		'title_sidebar' => 'Client List',

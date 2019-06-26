@@ -15,19 +15,16 @@ class CompidsController extends Controller
     public function index()
     {
         $compids = Compid::all();
-        // $cemails = $compids->cemails()->get()->pluck('client_email', 'id')
-        //                 ->prepend(trans('quickadmin.qa_please_select'), '');
         return view('admin.compids.index',compact('compids'));
-
-        // $compids = Compid::find(1)->cemails;
-        // return $compids;
 
     }
 
     public function create()
     {
-        $cemails = Compid::all();
-        return view('admin.compids.create',compact('cemails'));
+        // $cemails = Compid::all();
+        // return view('admin.compids.create',compact('cemails'));
+        $compids = Compid::all();
+        return view('admin.compids.index',compact('compids'));
     }
 
     public function store(Request $request)

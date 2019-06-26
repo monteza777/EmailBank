@@ -94,6 +94,13 @@
                             <span>@lang('quickadmin.cemails.title_sidebar')</span>
                         </a>
                     </li>@endcan
+                    @can('user_action_access')
+                    <li>
+                        <a href="{{ route('admin.issues.index') }}">
+                            <i class="fa fa-exclamation"></i>
+                            <span>@lang('quickadmin.issues.title')</span>
+                        </a>
+                    </li>@endcan
                     
                 </ul>
             </li>@endcan

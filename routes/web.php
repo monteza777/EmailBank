@@ -22,7 +22,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
+    Route::resource('issues', 'Admin\IssuesController');
+    Route::post('issues_mass_destroy', ['uses' => 'Admin\IssuesController@massDestroy', 'as' => 'issues.mass_destroy']);
     Route::get('clients/gmail/{id}','Admin\ClientsController@gmail')->name('clients.gmail');
+    Route::resource('clients', 'Admin\ClientsController');
     Route::resource('clients', 'Admin\ClientsController');
     Route::post('clients_mass_destroy', ['uses' => 'Admin\ClientsController@massDestroy', 'as' => 'clients.mass_destroy']);
     Route::get('compids/gmail/{id}','Admin\CompIdsController@gmail')->name('compids.gmail');
