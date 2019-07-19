@@ -28,8 +28,6 @@ class SystemCalendarController extends Controller
                 'url'   => route('admin.users.edit', $user->id)
            ]; 
         } 
-
-
        return view('admin.calendar' , compact('events')); 
     }
 
